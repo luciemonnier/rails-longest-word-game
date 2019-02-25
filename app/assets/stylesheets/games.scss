@@ -38,5 +38,13 @@ form > input {
   width: 200px;
   height: 100px;
   margin: 0px;
-  padding: 25px
+  padding: 25px;
+  margin-bottom: 20px;
+}
+
+.total_score {
+  border: solid 1px grey;
+  border-radius: 5%;
+  padding: 15px;
+  margin-bottom: 10px;
 }

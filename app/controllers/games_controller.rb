@@ -11,14 +11,11 @@ class GamesController < ApplicationController
     letters = params[:letters].split(' ')
     word = params[:word]
     if !in_the_grid?(word, letters)
-      @score = 0
-      @message = "CHEATER, #{word} IS NOT IN THE GRID"
+      not_in_the_grid(word)
     elsif !an_english_word?(word)
-      @score = 0
-      @message = "Sorry, #{word} isn't an english word..."
+      not_an_english_word(word)
     else
-      @score = word.length
-      @message = 'Good job!'
+      player_wins(word)
     end
   end
 
@@ -35,5 +32,24 @@ class GamesController < ApplicationController
     url = "https://wagon-dictionary.herokuapp.com/#{word}"
     data = JSON.parse(open(url).read)
     data['found']
+  end
+
+  def not_in_the_grid(word)
+    @score = 0
+    @message = "CHEATER, #{word} IS NOT IN THE GRID"
+    session[:score] = 0
+  end
+
+  def not_an_english_word(word)
+    @score = 0
+    @message = "Sorry, #{word} isn't an english word..."
+    session[:score] = 0
+  end
+
+  def player_wins(word)
+    @score = word.length
+    @message = 'Good job!'
+    session[:score] += @score
+    @session = session[:score]
   end
 end

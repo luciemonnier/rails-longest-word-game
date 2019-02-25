@@ -1,5 +1,9 @@
 <h1>Your score is:</h1>
 <p class="score"><%=@score%></p>
 <p class="message"><%=@message%></p>
+<div class="total_score">
+  <p>Your total score is:</p>
+  <p class="total"><%=@session%></p>
+</div>
 <%= link_to "Play again (you big fool ^^)", new_path%>
 
